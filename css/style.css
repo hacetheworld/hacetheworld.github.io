@@ -1,0 +1,608 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+section {
+    padding: 10rem 0;
+}
+
+.container {
+    max-width: 114rem;
+    margin: 0 auto;
+}
+
+/*
+* Header Design
+*/
+
+header {
+    background: #333;
+    padding: 10px 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+nav {
+    max-width: 90rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 1.6rem;
+
+
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+
+
+}
+
+.menu {
+    display: none;
+}
+
+.navigation__list {
+    margin-right: 3rem;
+    list-style: none;
+
+
+}
+
+.navigation__list a {
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #fff;
+
+}
+
+.navigation__list a:hover,
+.navigation__list a:focus {
+    color: #F82C68;
+}
+
+.logo h1 {
+    font-size: 25px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 300;
+    color: #FFF;
+}
+
+.helloBtn {
+    background-color: #F82C68;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    transition: transform .2s;
+}
+
+.helloBtn:hover {
+
+    transform: translateX(.2rem);
+}
+
+
+
+/*
+*Hero
+*/
+.hero {
+    position: relative;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../hero-blue-sky.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero__img {
+    width: 100%;
+    height: auto;
+}
+
+.hero__text {
+    width: 50%;
+    text-align: center;
+
+}
+
+.hero__text h3 {
+    color: #EEE;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.3;
+}
+
+.hero__text a.hero__link {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 400;
+    background-color: #F82C68;
+    padding: 1.5rem 3rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 2rem;
+    transition: all .3s;
+}
+
+.hero__text a.hero__link:hover {
+
+    transform: translateY(.2rem);
+}
+
+
+/*
+* About Me
+*/
+
+
+.about {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+.about__left {
+    flex-basis: 25%;
+    text-align: center;
+}
+
+.about__right {
+    flex-basis: 70%;
+
+}
+
+.about__text {
+    width: 100%;
+}
+
+.about__box {
+    padding: 2rem 4rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.4);
+}
+
+.about__box img {
+    border-radius: 50%;
+
+}
+
+.about__box h3 {
+    font-family: "Roboto Mono", monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-top: 1rem;
+    line-height: 1.5;
+}
+
+.about__box p {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #333;
+    margin-top: .5rem;
+    line-height: 1.5;
+}
+
+.about__box .social {
+    margin: 2rem 0;
+    list-style: none;
+}
+
+.about__box .social li {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #333;
+    margin: 1rem 0;
+
+}
+
+
+.about__box .social li a {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 400;
+
+    margin-left: 1rem;
+}
+
+.about__box .social li a i {
+    color: #F82C68;
+    font-size: 2rem;
+    font-weight: 100;
+
+}
+
+.about__right h1 {
+    font-family: "Roboto Mono", monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+
+}
+
+.about__right p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.5;
+    margin: 1rem 0;
+}
+
+
+/*
+* Technology
+*/
+
+.heading {
+    font-family: "Roboto Mono", monospace;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    text-transform: capitalize;
+
+}
+
+.technology {
+
+    margin: 6rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-gap: 2rem;
+}
+
+.technology__box {
+    text-align: center;
+    padding: 3rem 0;
+    background-color: #333;
+
+}
+
+.technology__box i {
+    font-size: 6rem;
+    font-weight: 300;
+    color: #F82C68;
+
+}
+
+.technology__box h3 {
+    font-family: "Lato", monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #eee;
+    text-transform: uppercase;
+    margin-top: 2rem;
+}
+
+/* portfolio */
+
+
+
+.portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-gap: 2rem;
+}
+
+#portfolio .heading {
+    margin-bottom: 4rem;
+}
+
+.portfolio img {
+    width: 100%;
+    height: 100%;
+
+}
+
+.portfolio a {
+    position: relative;
+    text-decoration: none;
+
+
+
+}
+
+.portfolio a div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(34, 34, 34);
+    opacity: .8;
+    transition: all .2s;
+}
+
+.portfolio a div:hover {
+    opacity: 0;
+}
+
+.portfolio a span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+    text-transform: uppercase;
+    font-family: "Lato", monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #fff;
+
+}
+
+
+/* reviews */
+
+#reviews {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.788), rgba(0, 0, 0, 0.801)), url("../dark-design-desk-777001.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+
+}
+
+#reviews h3 {
+    color: #fff;
+}
+
+.reviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-gap: 2rem;
+    margin: 4rem 0;
+}
+
+.review {
+    background-color: #fff;
+    padding: 2rem 2rem;
+}
+
+.review .review__star {
+    margin: 1rem 0;
+}
+
+.review .review__star i {
+    font-size: 2rem;
+    color: rgb(247, 168, 0)
+}
+
+.review p {
+    font-size: 1.4rem;
+
+    line-height: 1.3;
+}
+
+.review .review__place {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.review .review__place p {
+    font-weight: 700;
+}
+
+.review .review__place a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #F82C68;
+
+}
+
+#footer {
+    text-align: center;
+}
+
+.footer__p {
+    width: 75%;
+    margin: 2rem auto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #222;
+    line-height: 1.4;
+    margin-bottom: 4rem;
+}
+
+.footerbtn {
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: #F82C68;
+    color: #EEE;
+    font-size: 1.7rem;
+    padding: 1.5rem 3rem;
+}
+
+.footer__social {
+    margin: 2rem auto;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 50%;
+}
+
+.footer__social li {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #333;
+
+}
+
+
+
+.footer__social li a i {
+    color: #F82C68;
+    font-size: 3rem;
+    font-weight: 100;
+
+}
+
+
+footer {
+    background-color: #333;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+footer p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+footer a {
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #F82C68;
+}
+
+
+
+
+
+/******
+*Responsive Design
+******/
+
+
+@media (max-width:850px) {
+
+
+    html {
+        font-size: 55%;
+    }
+
+    section {
+        padding: 5rem 0;
+    }
+
+    .hero__text {
+        width: 90%;
+
+    }
+
+    nav {
+        justify-content: space-around;
+
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .navigation {
+        margin-top: 5rem;
+        height: 100vh;
+
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 25rem;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #333;
+        display: none;
+
+    }
+
+    .navigation.open-menu {
+        display: flex;
+    }
+
+    .navigation__list,
+    .navigation a {
+        margin-top: 2.5rem;
+
+    }
+
+    .menu {
+        display: block;
+    }
+
+    .menu i {
+        font-size: 2rem;
+    }
+
+    .menu i.fa-bars.open-menu {
+        display: none;
+    }
+
+
+
+    .menu i.fa-times.close-menu {
+        display: none;
+    }
+
+
+
+
+    /* //about */
+
+
+    .about {
+        flex-direction: column
+    }
+
+    .about__left {
+        margin-bottom: 3rem;
+    }
+
+    .about__right {
+        text-align: center;
+
+    }
+
+    .about__box .social {
+        display: flex;
+        justify-content: center;
+    }
+
+    .about__box .social li {
+        margin-right: 2rem;
+
+    }
+
+    .about__box .social li span {
+        display: none;
+
+    }
+
+    .about__box {
+        box-shadow: none;
+    }
+
+
+}
