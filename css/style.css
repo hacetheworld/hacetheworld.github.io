@@ -122,16 +122,31 @@ nav {
 .hero__text {
     width: 50%;
     text-align: center;
+        font-family: "Roboto Mono", monospace;
+    text-transform:capitalize ;
+    line-height: 1.2;
 
 }
 
 .hero__text h3 {
-    color: #EEE;
-    font-size: 2.5rem;
-    font-weight: 300;
-    line-height: 1.3;
+    color: #111;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
+.hero__text h1 {
+    color: #ddd;
+
+    font-size: 5rem;
+    font-weight: 700;
+}
+
+.hero__text p {
+    color: #111;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-top:1rem;
+}
 .hero__text a.hero__link {
     display: inline-block;
     font-size: 1.6rem;
@@ -175,6 +190,13 @@ nav {
 
 .about__text {
     width: 100%;
+}
+.about__text h1{
+    text-transform:capitalize;
+}
+.about__text p{
+    /* text-transform:capitalize; */
+    font-size:1.5rem;
 }
 
 .about__box {
