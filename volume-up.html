@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worst Volume Control Ever</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            text-align: center;
+            touch-action: manipulation;
+        }
+
+        .pump-down {
+            transform: translateY(100px);
+        }
+
+        .pump-transition {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pump-container {
+            position: relative;
+            height: 24rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pump-handle-container {
+            width: 6rem;
+            height: 12rem;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            user-select: none;
+        }
+
+        .pump-handle-container:active {
+            cursor: grabbing;
+        }
+
+        .pump-base-container {
+            width: 6rem;
+            height: 12rem;
+            position: absolute;
+            top: 6rem;
+        }
+
+        .pump-aesthetic-base {
+            position: absolute;
+            top: 15.5rem;
+            width: 12rem;
+            height: 3rem;
+            background-color: #374151;
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            border: 1px solid #4b5563;
+            border-top: none;
+        }
+
+        .volume-display {
+            margin-top: 2rem;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #4ade80;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #fff;">The Volume Control</h1>
+    <p style="font-size: 0.875rem; color: #9ca3af; margin-bottom: 2rem;">Pull the handle to increase volume. It decays
+        on its own.</p>
+
+    <!-- Pump Mechanism with integrated fill level -->
+    <div class="pump-container">
+
+        <!-- Pump Handle Container -->
+        <div id="pump-handle-container" class="pump-handle-container pump-transition">
+            <svg width="100%" height="100%" viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Handle with gradient -->
+                <rect x="10" y="0" width="80" height="20" rx="10" fill="url(#pump-gradient)" stroke="#374151"
+                    stroke-width="4" />
+                <circle cx="50" cy="20" r="10" fill="#6b7280" stroke="#374151" stroke-width="4" />
+                <rect x="40" y="20" width="20" height="80" fill="#6b7280" stroke="#374151" stroke-width="4" />
+                <defs>
+                    <linearGradient id="pump-gradient" x1="10" y1="10" x2="90" y2="10" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#a3a3a3" />
+                        <stop offset="1" stop-color="#6b7280" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- Pump Base SVG -->
+        <div class="pump-base-container">
+            <svg width="100%" height="100%" viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Base of the pump -->
+                <rect x="35" y="0" width="30" height="100" rx="15" fill="#4b5563" stroke="#374151" stroke-width="4" />
+                <rect x="38" y="3" width="24" height="94" rx="12" fill="#2d3748" />
+
+                <!-- Define the clip path to contain the fluid -->
+                <defs>
+                    <clipPath id="pump-fluid-clip">
+                        <rect x="38" y="3" width="24" height="94" rx="12" />
+                    </clipPath>
+                </defs>
+
+                <!-- The fill rectangle with the clip path applied -->
+                <rect id="fill-level" x="38" y="97" width="24" height="0" fill="#22c55e"
+                    clip-path="url(#pump-fluid-clip)" />
+            </svg>
+        </div>
+
+        <!-- Aesthethic base of the pump -->
+        <div class="pump-aesthetic-base"></div>
+    </div>
+
+    <!-- Volume Display -->
+    <div class="volume-display">
+        <span id="volume-level">0</span>%
+    </div>
+
+    <script>
+        const pumpHandleContainer = document.getElementById('pump-handle-container');
+        const fillLevel = document.getElementById('fill-level');
+        const volumeLevel = document.getElementById('volume-level');
+        const pumpDownClass = 'pump-down';
+
+        let currentVolume = 0;
+        let decayTimeout;
+        let decayInterval;
+        let isPumping = false;
+
+        // Function to update the visual fill level of the pump and display percentage
+        function updateFillLevel() {
+            // The fill area is 94 units tall, from y=3 to y=97
+            const maxHeight = 94;
+            // Calculate the new height based on the current volume percentage
+            const newHeight = (currentVolume / 100) * maxHeight;
+            // The fill y position should start from the bottom (97) and decrease as height increases
+            const newY = 97 - newHeight;
+
+            fillLevel.setAttribute('height', newHeight);
+            fillLevel.setAttribute('y', newY);
+            volumeLevel.textContent = Math.round(currentVolume);
+        }
+
+        // Decay function
+        function startDecay() {
+            clearTimeout(decayTimeout);
+            clearInterval(decayInterval);
+
+            decayTimeout = setTimeout(() => {
+                decayInterval = setInterval(() => {
+                    if (currentVolume > 0) {
+                        currentVolume = Math.max(0, currentVolume - 1);
+                        updateFillLevel();
+                    } else {
+                        currentVolume = 0;
+                        updateFillLevel();
+                        clearInterval(decayInterval);
+                    }
+                }, 50);
+            }, 1000);
+        }
+
+        // Action when a pump action is completed
+        function handlePumpRelease() {
+            if (!isPumping) return;
+            isPumping = false;
+
+            pumpHandleContainer.classList.remove(pumpDownClass);
+
+            // Generate a random increase between 3 and 8
+            const randomIncrease = Math.floor(Math.random() * 6) + 3;
+            currentVolume += randomIncrease;
+
+            // Cap the volume at 100%
+            if (currentVolume > 100) {
+                currentVolume = 100;
+            }
+
+            updateFillLevel();
+            startDecay();
+        }
+
+        // Mouse down event
+        pumpHandleContainer.addEventListener('mousedown', () => {
+            isPumping = true;
+            clearTimeout(decayTimeout);
+            clearInterval(decayInterval);
+            pumpHandleContainer.classList.add(pumpDownClass);
+        });
+
+        // Mouse up event on the entire document to catch all releases
+        document.addEventListener('mouseup', () => {
+            // Only fire if a pumping action was started
+            if (isPumping) {
+                handlePumpRelease();
+            }
+        });
+
+        // Touch events for mobile
+        pumpHandleContainer.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isPumping = true;
+            pumpHandleContainer.classList.add(pumpDownClass);
+            clearTimeout(decayTimeout);
+            clearInterval(decayInterval);
+        }, { passive: false });
+
+        document.addEventListener('touchend', (e) => {
+            if (isPumping) {
+                handlePumpRelease();
+            }
+        }, { passive: false });
+
+        // Initialize display
+        updateFillLevel();
+    </script>
+</body>
+
+</html>
